@@ -12,7 +12,8 @@ We benchmark zero-shot performance, parameter-efficient adaptations, transfer le
 - [Installation & Setup](#-installation--setup)
 - [Usage](#-usage)
 - [Results & Benchmarks](#-results--benchmarks)
-
+## 🧠 Model Backbone
+We explicitly utilize the **`ViT-B-32`** architecture instantiated via the native [OpenCLIP framework](https://github.com/mlfoundations/open_clip). Features are extracted natively through `open_clip.create_model_and_transforms()`.
 ## 🔍 Overview
 The goal of this project is to analyze how foundational Vision-Language Models (specifically CLIP) can be adapted to highly specialized remote sensing (satellite) data. The project contrasts simple prompt engineering with heavy parameter tuning, mapping out the trade-offs between computational overhead and classification accuracy.
 
@@ -21,7 +22,8 @@ The goal of this project is to analyze how foundational Vision-Language Models (
 * **Hugging Face / Source:** `blanchon/EuroSAT_RGB`
 * **Description:** Sentinel-2 satellite images covering 10 distinct land cover classes (e.g., Agriculture, Residential, Forest, Highway).
 * **Format:** 27,000 georeferenced patches, size 64x64 pixels.
-
+## 🧠 Model Backbone
+We explicitly utilize the **`ViT-B-32`** architecture instantiated via the native [OpenCLIP framework](https://github.com/mlfoundations/open_clip). Features are extracted natively through `open_clip.create_model_and_transforms()`.
 ## 🤖 Algorithms & Paradigms Implemented
 
 ### 1. Zero-Shot Alignment
