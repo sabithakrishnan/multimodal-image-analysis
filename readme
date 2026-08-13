@@ -1,1 +1,99 @@
+# EuroSAT Satellite Image Classification via Advanced CLIP Paradigms
+
+This repository evaluates and compares various vision-language paradigms, fine-tuning mechanisms, and custom architectures on the **EuroSAT RGB** dataset for land use and land cover classification. 
+
+We benchmark zero-shot performance, parameter-efficient adaptations, transfer learning adapters, and full cross-modality domain alignment.
+
+## 📋 Table of Contents
+- [Overview](#-overview)
+- [Dataset](#-dataset)
+- [Algorithms & Paradigms Implemented](#-algorithms--paradigms-implemented)
+- [Repository Structure](#-repository-structure)
+- [Installation & Setup](#-installation--setup)
+- [Usage](#-usage)
+- [Results & Benchmarks](#-results--benchmarks)
+
+## 🔍 Overview
+The goal of this project is to analyze how foundational Vision-Language Models (specifically CLIP) can be adapted to highly specialized remote sensing (satellite) data. The project contrasts simple prompt engineering with heavy parameter tuning, mapping out the trade-offs between computational overhead and classification accuracy.
+
+## 📊 Dataset
+* **Name:** EuroSAT (RGB version)
+* **Hugging Face / Source:** `blanchon/EuroSAT_RGB`
+* **Description:** Sentinel-2 satellite images covering 10 distinct land cover classes (e.g., Agriculture, Residential, Forest, Highway).
+* **Format:** 27,000 georeferenced patches, size 64x64 pixels.
+
+## 🤖 Algorithms & Paradigms Implemented
+
+### 1. Zero-Shot Alignment
+* **CLIP with Single Prompt:** Baseline zero-shot evaluation using a generic prompt (e.g., `"a satellite photo of [class]"`).
+* **CLIP with Structured Prompt:** Zero-shot evaluation leveraging structured context engineering optimized for remote sensing metadata.
+
+### 2. Feature Probing & Adapters
+* **Linear Probe CLIP:** Freezes the CLIP backbone and trains a linear layer on top of the extracted visual embeddings.
+* **Non-Linear MLP:** Freezes the CLIP backbone and feeds embeddings into a Multi-Layer Perceptron with non-linear activations to capture complex class boundaries.
+
+### 3. Parameter-Efficient Fine-Tuning (PEFT)
+* **LoRA (Low-Rank Adaptation):** Injects trainable low-rank matrices directly into the CLIP attention layers, fine-tuning the model with minimal hardware footprint.
+
+### 4. Custom Alignment & Domain Pre-training
+* **Cross-Modality Contrastive Fine-Tuning:** Jointly fine-tunes image and text encoders using an explicit contrastive loss (InfoNCE) optimized directly on EuroSAT.
+* **Domain-Specific CLIP:** A specialized architecture or training loop designed specifically to bridge the semantic gap between textual descriptions and remote sensing visuals.
+
+## 📂 Repository Structure
+```text
+├── src/
+│   ├── data_loader.py          # Script fetching blanchon/EuroSAT_RGB via HF Datasets
+│   ├── zero_shot_clip.py       # Single & Structured prompting scripts
+│   ├── probing.py              # Linear probe & MLP classifiers
+│   ├── peft_lora.py            # LoRA fine-tuning logic
+│   └── contrastive_train.py    # Cross-modality & domain-specific training loops
+├── requirements.txt            # System dependencies
+└── README.md                   # Project documentation
+```
+
+## ⚙️ Installation & Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com
+   cd your-repo-name
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   ```
+3. Install required packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## 🚀 Usage
+To run the evaluation pipeline across different modules, utilize the specific execution commands:
+
+* **Evaluate Zero-Shot CLIP:**
+  ```bash
+  python src/zero_shot_clip.py --prompt_type structured
+  ```
+* **Train Linear Probe / MLP:**
+  ```bash
+  python src/probing.py --model mlp --epochs 20
+  ```
+* **Run LoRA Fine-Tuning:**
+  ```bash
+  python src/peft_lora.py --rank 8
+  ```
+
+## 📈 Results & Benchmarks
+
+| Methodology | Accuracy | Precision | F1-Score | Trainable Params |
+| :--- | :---: | :---: | :---: | :---: |
+| CLIP (Single Prompt) | 00.0% | 00.0% | 00.0% | 0 (Zero-Shot) |
+| CLIP (Structured Prompt) | 00.0% | 00.0% | 00.0% | 0 (Zero-Shot) |
+| Linear Probe CLIP | 00.0% | 00.0% | 00.0% | ~5K |
+| Non-Linear MLP | 00.0% | 00.0% | 00.0% | ~150K |
+| LoRA CLIP | 00.0% | 00.0% | 00.0% | ~1.2M |
+| Cross-Modality Contrastive FT | 00.0% | 00.0% | 00.0% | All |
+| Domain-Specific CLIP | 00.0% | 00.0% | 00.0% | All |
+
+*(Note: Replace 00.0% placeholder values with your verified training results.)*
 
