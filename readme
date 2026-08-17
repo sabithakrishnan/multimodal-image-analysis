@@ -86,15 +86,15 @@ To run the evaluation pipeline across different modules, utilize the specific ex
 
 ## 📈 Results & Benchmarks
 
-| Methodology | Accuracy | Precision | F1-Score | Trainable Params |
+| Methodology | Accuracy | Precision | Recall | f1 score |
 | :--- | :---: | :---: | :---: | :---: |
-| CLIP (Single Prompt) | 00.0% | 00.0% | 00.0% | 0 (Zero-Shot) |
-| CLIP (Structured Prompt) | 00.0% | 00.0% | 00.0% | 0 (Zero-Shot) |
-| Linear Probe CLIP | 00.0% | 00.0% | 00.0% | ~5K |
-| Non-Linear MLP | 00.0% | 00.0% | 00.0% | ~150K |
-| LoRA CLIP | 00.0% | 00.0% | 00.0% | ~1.2M |
-| Cross-Modality Contrastive FT | 00.0% | 00.0% | 00.0% | All |
-| Domain-Specific CLIP | 00.0% | 00.0% | 00.0% | All |
+| CLIP (Single Prompt) | 85.4| 23.68 | 29.40 | 23.41 |
+| CLIP (Structured Prompt) | 88.75 | 42.74 | 44.58 |37.61|
+| Linear Probe CLIP | 96.78 | 83.92 | 83.92 | 83.92 |
+| Non-Linear MLP | 87.30 | 37.64 | 35.09 | 30.58 |
+| LoRA CLIP | 72.29 |76.14 | 69.57 | 68.43 |
+| neural network with nce loss | 81.57| 80.48 | 81.02 | 80.51 |
+| Domain-Specific CLIP(geoclip) | 88.75 | 42.74 | 44.58 | 37.61 |
 
-*(Note: Replace 00.0% placeholder values with your verified training results.)*
+
 
